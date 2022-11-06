@@ -6,5 +6,6 @@ ChatTriggers Module
 ### Commands
 * /ghosts
   * Opens Settings
-*/ghosts_rs
+  
+* /ghosts_rs
   * Reset Your Ghosts Display Stats
