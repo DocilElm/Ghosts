@@ -1,0 +1,2 @@
+# Ghosts
+ChatTriggers Module
