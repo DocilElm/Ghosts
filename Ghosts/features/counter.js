@@ -10,7 +10,7 @@ let plasma_profit = 0;
 let is_in_mist = false;
 register('actionbar', (g, total, c) => {
     let scoreb = Scoreboard.getLines(false);
-    is_in_mist = scoreb[4].getName().includes("The Mist");
+    is_in_mist = scoreb[4].getName().includes("The Mist") || scoreb[5].getName().includes("The Mist");
     if(!is_in_mist) return;
     let total_xp = total.replace(/\D/g, "");
     if(oldcurrent == 0) oldcurrent = total_xp;
