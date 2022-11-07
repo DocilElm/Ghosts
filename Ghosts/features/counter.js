@@ -2,6 +2,7 @@ import { abc, data, PREFIX, short_number } from "../utils/utils";
 import request from '../../requestV2';
 import config from "../config";
 let oldcurrent = 0;
+let oldperc = null;
 let session_xp = 0;
 let session_pet_xp = 0;
 let sorrow_profit = 0;
@@ -11,17 +12,36 @@ let is_in_mist = false;
 register('actionbar', (g, total, c) => {
     let scoreb = Scoreboard.getLines(false);
     is_in_mist = scoreb[4].getName().includes("The Mist") || scoreb[5].getName().includes("The Mist");
-    if(!is_in_mist) return;
-    let total_xp = total.replace(/\D/g, "");
-    if(oldcurrent == 0) oldcurrent = total_xp;
-    else if(total_xp !== oldcurrent){
-        session_xp += total_xp-oldcurrent;
-        session_pet_xp += (total_xp-oldcurrent)*1.5;
-        data.ghost_kills += 1;
-        data.save();
-        oldcurrent = total_xp;
+    if(is_in_mist){
+        let total_xp = parseInt(total.replace(/\D/g, ""));
+        if(oldcurrent == 0) oldcurrent = total_xp;
+        else if(total_xp !== oldcurrent){
+            session_xp += total_xp-oldcurrent;
+            session_pet_xp += (total_xp-oldcurrent)*1.5;
+            data.ghost_kills += 1;
+            data.save();
+            oldcurrent = total_xp;
+        }
     }
 }).setCriteria('${*}+${gained} Combat (${total}/${current})${*}');
+register("actionBar", (g, percentage) => {
+    let gained = parseInt(g);
+    if(percentage.includes("%")){
+        let scoreb = Scoreboard.getLines(false);
+        is_in_mist = scoreb[4].getName().includes("The Mist") || scoreb[5].getName().includes("The Mist");
+        if(is_in_mist){
+            let total_perc = percentage.replace("%","");
+            if(oldperc == null) oldperc = `${total_perc}`;
+            else if(total_perc !== oldperc){
+                session_xp += gained;
+                session_pet_xp += gained*1.5;
+                data.ghost_kills += 1;
+                data.save();
+                oldperc = `${total_perc}`;
+            }
+        }
+    }
+}).setCriteria("${*}+${g} Combat (${percentage})${*}")
 register("chat", (drop, mf) => {
     if(drop == "Plasma") data.plasma_gained += 1;
     else if(drop == "Volta") data.voltas_gained += 1;
