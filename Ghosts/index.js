@@ -3,7 +3,9 @@
 import Settings from "./config";
 import { data, PREFIX } from "./utils/utils";
 import "./utils/utils";
-import "./features/counter";
+import "./features/counter_xp";
+import "./features/counter_kills";
+import "./features/counter_entity";
 register("command", () => Settings.openGUI()).setName("ghosts", true);
 register("step", () => {
     if (data.first_time) {

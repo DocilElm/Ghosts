@@ -35,3 +35,15 @@ register("command", () => {
     data.death_materialized = 0;
     data.save();
 }).setName("ghosts_rs");
+register("chat", (drop, mf) => {
+    if(drop == "Plasma") data.plasma_gained += 1;
+    else if(drop == "Volta") data.voltas_gained += 1;
+    else if(drop == "Sorrow") data.sorrows_gained += 1;
+    else if(drop == "Ghostly Boots") data.ghostly_boots += 1;
+    data.magic_find = parseInt(mf);
+    data.save();
+}).setCriteria("RARE DROP! ${drop} (+${mf}% ✯ Magic Find)");
+register("chat", () => {
+    data.death_materialized += 1;
+    data.save();
+}).setCriteria("The ghost's death materialized 1,000,000 coins from the mists!");

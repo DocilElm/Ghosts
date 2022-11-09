@@ -23,6 +23,14 @@ class Settings {
         subcategory: "General"
     })
     config_display = true
+    @SelectorProperty({
+        name: "Type",
+        description: "Tracking Type for SessionXP and Ghosts Kills\n§4This Might Not Be Accurate",
+        category: "General",
+        subcategory: "General",
+        options: ["XP Gained","Book Of Stats","Entity Killed"]
+    })
+    config_type = 0;
     @ButtonProperty({
         name: "Display Location",
         description: "Changes The Display Location",
