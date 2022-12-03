@@ -28,7 +28,7 @@ class Settings {
         description: "Tracking Type for SessionXP and Ghosts Kills\n§4This Might Not Be Accurate",
         category: "General",
         subcategory: "General",
-        options: ["XP Gained","Book Of Stats","Entity Killed"]
+        options: ["XP Gained", "Book Of Stats", "Entity Killed", "Champion Enchant"]
     })
     config_type = 0;
     @ButtonProperty({

@@ -1,12 +1,15 @@
 /// <reference types="../CTAutocomplete" />
 /// <reference lib="es2015" />
-import Settings from "./config";
-import { data, PREFIX } from "./utils/utils";
-import "./utils/utils";
-import "./features/counter_xp";
-import "./features/counter_kills";
-import "./features/counter_entity";
-register("command", () => Settings.openGUI()).setName("ghosts", true);
+import Settings from "./config"
+import { data, PREFIX } from "./utils/utils"
+import "./utils/utils"
+import "./features/counter_xp"
+import "./features/counter_kills"
+import "./features/counter_entity"
+import "./features/counter_champion"
+
+register("command", () => Settings.openGUI()).setName("ghosts", true)
+
 register("step", () => {
     if (data.first_time) {
         data.first_time = false; 
@@ -16,4 +19,4 @@ register("step", () => {
         new TextComponent(ChatLib.getCenteredText(`${PREFIX}&aJoin Our Discord!  &b&nDiscord&r &7(Click)`)).setClickAction("open_url").setClickValue("https://discord.gg/SK9UDzquEN").chat();
         ChatLib.chat("");
     };
-}).setFps(1);
+}).setFps(1)
